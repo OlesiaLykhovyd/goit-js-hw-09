@@ -28,8 +28,7 @@ const timer = {
       const currentTime = new Date();
       const time = datePicker.selectedDates[0] - currentTime;
       const timeComponents = convertMs(time);
-      console.log(timeComponents);
-      updateClockFace(timeComponents);
+      updateClockFace(timeComponents, time);
     }, 1000);
   },
 
@@ -46,7 +45,6 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    // console.log(selectedDates[0]);
     const currentDate = new Date();
 
     ifDateInPast(selectedDates[0], currentDate);
@@ -77,19 +75,15 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-function updateClockFace({ days, hours, minutes, seconds }) {
-  dataDays.textContent = `${days}`;
-  dataHours.textContent = `${hours}`;
-  dataMinutes.textContent = `${minutes}`;
-  dataSeconds.textContent = `${seconds}`;
-
-  if (
-    dataDays.textContent === '00' &&
-    dataHours.textContent === '00' &&
-    dataMinutes.textContent === '00' &&
-    dataSeconds.textContent === '00'
-  )
+function updateClockFace({ days, hours, minutes, seconds }, time) {
+  if (time <= 0) {
     timer.stop();
+    return;
+  }
+  dataDays.textContent = days;
+  dataHours.textContent = hours;
+  dataMinutes.textContent = minutes;
+  dataSeconds.textContent = seconds;
 }
 
 function addLeadingZero(value) {
