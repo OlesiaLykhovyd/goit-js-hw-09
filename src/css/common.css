@@ -19,6 +19,7 @@ img {
 
 .timer {
   display: flex;
+  margin-top: 15px;
 }
 
 .field:not(:last-child) {
@@ -28,10 +29,6 @@ img {
 .field {
   display: flex;
   flex-direction: column;
-}
-
-.timer {
-  margin-top: 15px;
 }
 
 input[id='datetime-picker'] {
